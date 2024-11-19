@@ -10,4 +10,5 @@ RUN apt-get update && apt-get install -y \
     flex
 
 RUN pip install boltz
+RUN bolz --help
 WORKDIR /opt
