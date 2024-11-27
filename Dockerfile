@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
     flex
+RUN echo 'alias mmseqs="mmseqs-avx2"' >> ~/.bashrc
 
 RUN pip install boltz==0.2.1
-
 WORKDIR /opt
