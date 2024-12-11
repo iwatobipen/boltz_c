@@ -11,8 +11,9 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     flex
 #RUN pip3 install boltz==0.3.2
-RUN python -m pip install --upgrade pip
+
 RUN git clone https://github.com/jwohlwend/boltz.git && \
 cd boltz && \
-pip install -e --user .
+touch setup.cfg && \
+pip install -e .
 WORKDIR /opt
