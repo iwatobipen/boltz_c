@@ -5,15 +5,29 @@ RUN apt-get update && apt-get install -y \
     git \
     vim \
     sudo \
-    build-essential \
-    bison \
-    python3.11 \
-    python3-pip \
-    flex
-RUN pip3 install boltz==0.3.2
+    build-essential
+WORKDIR /opt
 
+RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mambaforge-24.3.0-0-Linux-x86_64.sh && \
+    git clone https://github.com/jwohlwend/boltz.git && \
+    sh Mambaforge-24.3.0-0-Linux-x86_64.sh -b -p /opt/Mambaforge && \
+    rm -r Mambaforge-24.3.0-0-Linux-x86_64.sh
+
+ENV PATH /opt/Mambaforge/bin:$PATH
+WORKDIR /opt/boltz
+RUN mamba create -n boltz python=3.10 -y && \
+    conda init
+SHELL ["conda", "run", "-n", "boltz", "/bin/bash", "-c"]
+
+RUN touch setup.cfg && \
+    conda clean --all -y && \ 
+    pip cache purge && \
+    pip install -e . && \
+    echo "conda activate openfe_env" >> ~/.bashrc
+
+ENV PATH /opt/Mambaforge/envs/boltz/bin:$PATH
 #RUN git clone https://github.com/jwohlwend/boltz.git && \
 #cd boltz && \
 #touch setup.cfg && \
 #pip install -e .
-WORKDIR /opt
+
