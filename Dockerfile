@@ -24,7 +24,7 @@ RUN touch setup.cfg && \
     conda clean --all -y && \ 
     pip cache purge && \
     pip install -e . && \
-    echo "conda activate openfe_env" >> ~/.bashrc
+    echo "conda activate boltz" >> ~/.bashrc
 
 ENV PATH /opt/Mambaforge/envs/boltz/bin:$PATH
 #RUN git clone https://github.com/jwohlwend/boltz.git && \
