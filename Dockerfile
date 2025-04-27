@@ -16,15 +16,15 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/24.11.3-2/Mi
     
 ENV PATH /opt/Miniforge/bin:$PATH
 WORKDIR /opt/boltz
-RUN mamba create -n boltz python=3.10 -y && \
-    mamba init
-SHELL ["mamba", "run", "-n", "boltz", "/bin/bash", "-c"]
+RUN conda create -n boltz python=3.10 -y && \
+    conda init
+SHELL ["conda", "run", "-n", "boltz", "/bin/bash", "-c"]
 
 RUN touch setup.cfg && \
-    mamba clean --all -y && \ 
+    conda clean --all -y && \ 
     pip cache purge && \
     pip install -e . && \
-    echo "mamba activate boltz" >> ~/.bashrc
+    echo "conda activate boltz" >> ~/.bashrc
 
 ENV PATH /opt/Miniforge/envs/boltz/bin:$PATH
 
