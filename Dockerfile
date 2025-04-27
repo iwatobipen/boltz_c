@@ -16,13 +16,12 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/24.11.3-2/Mi
     
 ENV PATH /opt/Miniforge/bin:$PATH
 WORKDIR /opt/boltz
-RUN ls
 RUN conda create -n boltz python=3.10 -y && \
     conda init
 SHELL ["conda", "run", "-n", "boltz", "/bin/bash", "-c"]
 
-RUN touch setup.cfg && \
-    conda clean --all -y && \ 
+#RUN touch setup.cfg && \
+RUN conda clean --all -y && \ 
     pip cache purge && \
     pip install -e . && \
     echo "conda activate boltz" >> ~/.bashrc
