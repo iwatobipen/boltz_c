@@ -19,6 +19,7 @@ ENV PATH /opt/Miniforge/bin:$PATH
 WORKDIR /opt/boltz
 RUN conda create -n boltz python=3.11 -y && \
     conda init
+    
 SHELL ["conda", "run", "-n", "boltz", "/bin/bash", "-c"]
 
 RUN touch setup.cfg && \
