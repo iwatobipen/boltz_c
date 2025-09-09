@@ -1,7 +1,7 @@
 FROM nvidia/cuda:12.3.2-cudnn9-runtime-ubuntu22.04
 
 
-# 2.2.0
+# 2.2.1
 # retry
 
 RUN apt-get update && apt-get install -y \
